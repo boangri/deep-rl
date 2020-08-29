@@ -7,6 +7,7 @@ from collections import deque
 import random
 import numpy as np
 
+
 class ReplayBuffer(object):
 
     def __init__(self, buffer_size, random_seed=123):
@@ -31,8 +32,6 @@ class ReplayBuffer(object):
         return self.count
 
     def sample_batch(self, batch_size):
-        batch = []
-
         if self.count < batch_size:
             batch = random.sample(self.buffer, self.count)
         else:
@@ -49,5 +48,3 @@ class ReplayBuffer(object):
     def clear(self):
         self.buffer.clear()
         self.count = 0
-
-

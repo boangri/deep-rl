@@ -17,11 +17,12 @@ import tflearn
 import argparse
 import pprint as pp
 
-from replay_buffer import ReplayBuffer
+from ddpg.replay_buffer import ReplayBuffer
 
 # ===========================
 #   Actor and Critic DNNs
 # ===========================
+
 
 class ActorNetwork(object):
     """
@@ -247,12 +248,18 @@ def build_summaries():
 
     return summary_ops, summary_vars
 
-# ===========================
-#   Agent Training
-# ===========================
 
 def train(sess, env, args, actor, critic, actor_noise):
-
+    """
+    Agent Training
+    :param sess:
+    :param env:
+    :param args:
+    :param actor:
+    :param critic:
+    :param actor_noise:
+    :return:
+    """
     # Set up summary Ops
     summary_ops, summary_vars = build_summaries()
 
@@ -341,6 +348,7 @@ def train(sess, env, args, actor, critic, actor_noise):
                         i, (ep_ave_max_q / float(j))))
                 break
 
+
 def main(args):
 
     with tf.Session() as sess:
@@ -378,6 +386,7 @@ def main(args):
 
         if args['use_gym_monitor']:
             env.monitor.close()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='provide arguments for DDPG agent')
